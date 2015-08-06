@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -35,20 +36,10 @@ namespace JFYInformation.Controllers
             baseUrls.Add("http://bj.58.com/job/pn7/?PGTID=159266601188573828500733788&ClickID=1");
             baseUrls.Add("http://bj.58.com/job/pn8/?PGTID=159266601188573828500733788&ClickID=1");
 
-            HttpHelper http = new HttpHelper();
-            HttpItem item = new HttpItem()
-            {
-                //URL = "http://bj.58.com/jiazhengbaojiexin/22353664668041x.shtml",//URL这里都是测试     必需项
-                URL = "http://bj.58.com/job/pn2/?PGTID=159266601188573828500733788&ClickID=1",
-                Method = "get",//URL     可选项 默认为Get
-            };
-
             foreach (var baseUrl in baseUrls)
             {
-                item.URL = baseUrl;
-                //得到HTML代码
-                HttpResult result = http.GetHtml(item);
-                string res = StringHelper.GetMidTxt(result.Html, "<div id=\"maincon\" class=\"maincon\">", "<div class=\"seleAll\" tongji_id=\"ZP_job_list_div_atAll\">");
+                var result = HttpHelper.HttpGet(baseUrl, System.Text.Encoding.UTF8);
+                string res = StringHelper.GetMidTxt(result, "<div id=\"maincon\" class=\"maincon\">", "<div class=\"seleAll\" tongji_id=\"ZP_job_list_div_atAll\">");
                 urls = StringHelper.RegMatchUrl(res);
                 links.AddRange(urls);
             }
@@ -56,21 +47,29 @@ namespace JFYInformation.Controllers
             {
                 using (DB db = new DB())
                 {
+                    int i = 0;
                     foreach (var link in links)
                     {
-                        item.URL = link;
+                        i++;
+                        if (i == 10)
+                        {
+                            i = 0;
+                            Thread.Sleep(5000);
+                        }
+                       
                         System.Diagnostics.Debug.WriteLine("正在获取：" + link);
                         try
                         {
-                            HttpResult result = http.GetHtml(item);
-                            if (result.Html != "")
+
+                            var result = HttpHelper.HttpGet(link, System.Text.Encoding.UTF8);
+                            if (result != "")
                             {
                                 string regexStr = "<input id=\"pagenum\" value=\"(?<key>\\S*)\"[\\S\\s]*?>";
                                 string regexCompany = "<div class=\"company\">[\\s\\S]*?<a class=\"companyName\"[\\S\\s]*?>(?<companyName>[\\s\\S]*?)</a>[\\S\\s]*?<div class=\"vip-yan fl\">";
                                 Regex r = new Regex(regexStr, RegexOptions.None);
                                 Regex rcompany = new Regex(regexCompany, RegexOptions.None);
-                                Match mc = r.Match(result.Html);
-                                Match mccompany = rcompany.Match(result.Html);
+                                Match mc = r.Match(result);
+                                Match mccompany = rcompany.Match(result);
                                 string v = mc.Groups["key"].Value;
                                 if (v != "")
                                 {
@@ -85,7 +84,7 @@ namespace JFYInformation.Controllers
                                     db.SaveChanges();
                                     System.Diagnostics.Debug.WriteLine("公司名：" + company.CompanyName);
                                 }
-                              
+
                             }
                         }
                         catch (Exception ex)
