@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -42,7 +43,7 @@ namespace JFYInformation.Controllers
                 Method = "get",//URL     可选项 默认为Get
             };
 
-            /*foreach (var baseUrl in baseUrls)
+            foreach (var baseUrl in baseUrls)
             {
                 item.URL = baseUrl;
                 //得到HTML代码
@@ -51,46 +52,56 @@ namespace JFYInformation.Controllers
                 urls = StringHelper.RegMatchUrl(res);
                 links.AddRange(urls);
             }
-            using (DB db = new DB())
+            Task.Factory.StartNew(() =>
             {
-                foreach (var link in links)
+                using (DB db = new DB())
                 {
-                    item.URL = link;
-                    HttpResult result = http.GetHtml(item);
-                    if (result.Html == "")
+                    foreach (var link in links)
                     {
-                        continue;
+                        item.URL = link;
+                        System.Diagnostics.Debug.WriteLine("正在获取：" + link);
+                        try
+                        {
+                            HttpResult result = http.GetHtml(item);
+                            if (result.Html != "")
+                            {
+                                string regexStr = "<input id=\"pagenum\" value=\"(?<key>\\S*)\"[\\S\\s]*?>";
+                                string regexCompany = "<div class=\"company\">[\\s\\S]*?<a class=\"companyName\"[\\S\\s]*?>(?<companyName>[\\s\\S]*?)</a>[\\S\\s]*?<div class=\"vip-yan fl\">";
+                                Regex r = new Regex(regexStr, RegexOptions.None);
+                                Regex rcompany = new Regex(regexCompany, RegexOptions.None);
+                                Match mc = r.Match(result.Html);
+                                Match mccompany = rcompany.Match(result.Html);
+                                string v = mc.Groups["key"].Value;
+                                if (v != "")
+                                {
+                                    string companyName = mccompany.Groups["companyName"].Value;
+                                    companyName = companyName.Replace("\n", "");
+                                    Company company = new Company();
+                                    company.Phone = "http://image.58.com/showphone.aspx?v=" + v;
+                                    company.Time = DateTime.Now;
+                                    company.CompanyName = companyName;
+                                    company.URL = link;
+                                    db.Companies.Add(company);
+                                    db.SaveChanges();
+                                    System.Diagnostics.Debug.WriteLine("公司名：" + company.CompanyName);
+                                }
+                              
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine(ex.ToString());
+                        }
                     }
-                    string regexStr = "<input id=\"pagenum\" value=\"(?<key>\\S*)\"[\\S\\s]*?>";
-                    string regexCompany = "<a class=\"companyName\"[\\S\\s]*?>(?<company>\\S*)</a>";
-                    Regex r = new Regex(regexStr, RegexOptions.None);
-                    Regex rcompany = new Regex(regexCompany, RegexOptions.None);
-                    Match mc = r.Match(result.Html);
-                    Match mccompany = rcompany.Match(result.Html);
-                    string v = mc.Groups["key"].Value;
-                    string companyName = mccompany.Groups["company"].Value;
-                    Company company = new Company();
-                    company.Phone = "http://image.58.com/showphone.aspx?v=" + v;
-                    company.Time = DateTime.Now;
                 }
-            }
-            */
-
-
-            item.URL = "http://bj.58.com/zpwuliucangchu/22871129161377x.shtml?psid=107549447188574280840697065&entinfo=22871129161377_0";
-            HttpResult result = http.GetHtml(item);
-            string regexStr = "<input id=\"pagenum\" value=\"(?<key>\\S*)\"[\\S\\s]*?>";
-            string regexCompany = "<a class=\"companyName\"[\\S\\s]*?>(?<companyName>\\S*)</a>";
-            Regex r = new Regex(regexStr, RegexOptions.None);
-            Regex rcompany = new Regex(regexCompany, RegexOptions.None);
-            Match mc = r.Match(result.Html);
-            Match mccompany = rcompany.Match(result.Html);
-            string v = mc.Groups["key"].Value;
-            string companyName = mccompany.Groups["companyName"].Value;
+            });
 
 
 
-           // ViewBag.Links = links;
+
+
+
+            // ViewBag.Links = links;
             //ViewBag.Keys = keys;
             return View();
         }
