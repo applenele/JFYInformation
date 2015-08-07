@@ -111,6 +111,7 @@ namespace JFYInformation.Controllers
             return View(company);
         }
 
+        [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult CompanyEdit(Company model)
         {

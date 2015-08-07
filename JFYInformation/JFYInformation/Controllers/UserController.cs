@@ -79,7 +79,7 @@ namespace JFYInformation.Controllers
             return RedirectToAction("Login", "User");
         }
         #endregion
-        
+
 
         /// <summary>
         /// 用户展示
@@ -99,6 +99,38 @@ namespace JFYInformation.Controllers
             User user = new User();
             user = db.Users.Find(id);
             return File(user.Picture, "image/jpg");
+        }
+
+        /// <summary>
+        /// 修改信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var user = db.Users.Find(id);
+            return View(user);
+        }
+
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Edit(vUser model)
+        {
+            var user = db.Users.Find(model.ID);
+            if (ModelState.IsValid)
+            {
+                user.Phone = model.Phone;
+                user.Address = model.Address;
+                user.RealName = model.RealName;
+                db.SaveChanges();
+                return Redirect("/User/Show/"+model.ID);
+            }
+            else
+            {
+                ModelState.AddModelError("","信息填写错误！");
+            }
+            return View(user);
         }
     }
 }

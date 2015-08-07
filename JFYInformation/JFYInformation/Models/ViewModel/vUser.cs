@@ -11,10 +11,8 @@ namespace JFYInformation.Models.ViewModel
     {
         public int ID { set; get; }
 
-        [Required]
         public string Username { set; get; }
 
-        [Required]
         public string Password { set; get; }
 
         public string Role { set; get; }
