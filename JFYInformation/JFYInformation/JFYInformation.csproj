@@ -125,6 +125,7 @@
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OperatorController.cs" />
+    <Compile Include="Controllers\SystemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +139,7 @@
     <Compile Include="Helpers\PagerHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Helpers\Time.cs" />
+    <Compile Include="Models\City.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Company.cs" />
@@ -172,6 +174,8 @@
     <Content Include="Views\Operator\OperatorShow.cshtml" />
     <Content Include="Views\Operator\RoleUpdate.cshtml" />
     <Content Include="Views\Operator\UpdateOperatorPwd.cshtml" />
+    <Content Include="Views\System\CityManage.cshtml" />
+    <Content Include="Views\System\AddCity.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

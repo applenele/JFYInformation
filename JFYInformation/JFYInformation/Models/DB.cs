@@ -13,5 +13,7 @@ namespace JFYInformation.Models
         public DbSet<Company> Companies { set; get; }
 
         public DbSet<User> Users { set; get; }
+
+        public DbSet<City> Cities { set; get; }
     }
 }

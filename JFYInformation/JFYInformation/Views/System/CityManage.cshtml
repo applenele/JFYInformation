@@ -1,0 +1,41 @@
+﻿@model IEnumerable<JFYInformation.Models.City>
+@{
+    ViewBag.Title = "城市管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+    <div class="result-title">
+        <h1 class="head-tietle">城市管理 <a href="/System/AddCity">增加</a></h1>
+    </div>
+    <div class="result-content">
+        <form class="search">
+            检索：
+            <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
+            <input type="submit" class="btn btn-info" value="检索" />
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>省份</td>
+                    <td>城市</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.ID">
+                        <td>@item.ID</td>
+                        <td>@item.Province</td>
+                        <td>@item.CityName</td>
+                        <td>
+                            <a href="javascript:deleteDialog('/System/CityDelete/' + @item.ID + '?sid=@ViewBag.SID',@item.ID);">删除</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <span class="pager-item" style="margin-top:20px;">共：@ViewBag.CityCount 条数据</span>@Html.MakePager()
+    </div>
+</div>

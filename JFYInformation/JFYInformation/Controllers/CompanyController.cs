@@ -14,10 +14,19 @@ namespace JFYInformation.Controllers
     public class CompanyController : BaseController
     {
         // GET: Company
-        public ActionResult Index(int? Statu, int? DealResult,string Key ,string City, int p = 0)
+        public ActionResult Index(int? Statu, int? DealResult, string Key, DateTime? Begin, DateTime? End, string City, int p = 0)
         {
+            var Cities = new List<City>();
             var query = db.Companies.AsEnumerable();
             List<vCompany> companies = new List<vCompany>();
+            if (Begin.HasValue)
+            {
+                query = query.Where(c => c.Time >= Begin);
+            }
+            if (End.HasValue)
+            {
+                query = query.Where(c => c.Time <= End);
+            }
             if (Statu.HasValue)
             {
                 query = query.Where(c => c.StatuAsInt == Statu);
@@ -41,6 +50,8 @@ namespace JFYInformation.Controllers
             {
                 companies.Add(new vCompany(item));
             }
+            Cities = db.Cities.ToList();
+            ViewBag.Cities = Cities;
             return View(companies);
         }
 
@@ -135,7 +146,7 @@ namespace JFYInformation.Controllers
                     company.Description = model.Description;
                     company.Property = model.Property;
                     db.SaveChanges();
-                    return Redirect("/Company/CompanyShow/"+model.ID);
+                    return Redirect("/Company/CompanyShow/" + model.ID);
                 }
                 catch
                 {

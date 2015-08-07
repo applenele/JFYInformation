@@ -21,6 +21,7 @@ namespace JFYInformation.Controllers
         [HttpGet]
         public ActionResult OperatorManage(string key, DateTime? Begin, DateTime? End, int p = 1)
         {
+           
             var query = db.Users.OrderBy(u => u.ID).AsEnumerable();
             if (Begin.HasValue)
             {
@@ -30,8 +31,13 @@ namespace JFYInformation.Controllers
             {
                 query = query.Where(c => c.Time <= End);
             }
+            if (!string.IsNullOrEmpty(key))
+            {
+                query = query.Where(c => c.Username.Contains(key) || c.RealName.Contains(key));
+            }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
+          
             return View(query);
         }
         #endregion

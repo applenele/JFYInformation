@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "增加城市";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <div class="result-title">
+        <h1 class="head-tietle">增加城市 <small><a href="/System/CityManage">城市管理</a></small></h1>
+    </div>
+    @using (Html.BeginForm("AddCity", "System", FormMethod.Post, new { id = "frmAddCity" }))
+    {
+        @Html.AntiForgeryToken()
+        <table class="detail-table">
+            <tr>
+                <td class="row-title">省份</td>
+                <td>
+                    <input type="text" class="textbox w-2" name="Province" />
+                </td>
+            </tr>
+            <tr>
+                <td class="row-title">城市</td>
+                <td>
+                    <input type="text" name="CityName" class="textbox w-2" />
+                </td>
+            </tr>
+        </table>
+        <p>@Html.ValidationSummary(true)</p>
+        <p><input type="submit" value="增加" class="button blue" /></p>
+    }
+</div>
+
