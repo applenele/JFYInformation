@@ -14,7 +14,7 @@ namespace JFYInformation.Controllers
     public class CompanyController : BaseController
     {
         // GET: Company
-        public ActionResult Index(int? Statu,int? DealResult,string City, int p = 0)
+        public ActionResult Index(int? Statu, int? DealResult, string City, int p = 0)
         {
             var query = db.Companies.AsEnumerable();
             List<vCompany> companies = new List<vCompany>();
@@ -31,6 +31,7 @@ namespace JFYInformation.Controllers
                 query = query.Where(c => c.Source.Contains(City) || c.Address.Contains(City));
             }
             query = query.OrderByDescending(x => x.Time);
+            ViewBag.CompanyCount = query.Count();
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
             foreach (var item in query)
             {
@@ -76,6 +77,7 @@ namespace JFYInformation.Controllers
             return View(new vCompany(company));
         }
 
+        #region 处理
         /// <summary>
         /// 处理
         /// </summary>
@@ -99,16 +101,46 @@ namespace JFYInformation.Controllers
 
         }
 
+        #endregion
+
         [HttpGet]
         public ActionResult CompanyEdit(int id)
         {
             Company company = new Company();
-
+            company = db.Companies.Find(id);
             return View(company);
         }
 
-
-
+        [HttpPost]
+        public ActionResult CompanyEdit(Company model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var company = db.Companies.Find(model.ID);
+                    company.CompanyName = model.CompanyName;
+                    company.Address = model.Address;
+                    company.Contacts = model.Contacts;
+                    company.Industry = model.Industry;
+                    company.Scale = model.Scale;
+                    company.URL = model.URL;
+                    company.Description = model.Description;
+                    company.Property = model.Property;
+                    db.SaveChanges();
+                    return Redirect("/Company/CompanyShow/"+model.ID);
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "修改出错");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "信息填写错误");
+            }
+            return View();
+        }
 
     }
 }

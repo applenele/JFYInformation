@@ -162,6 +162,7 @@
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
     <Content Include="Views\Company\CompanyShow.cshtml" />
+    <Content Include="Views\Company\CompanyEdit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
