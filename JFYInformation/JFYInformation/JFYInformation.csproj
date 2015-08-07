@@ -141,6 +141,7 @@
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModel\vCompany.cs" />
     <Compile Include="Models\ViewModel\vLogin.cs" />
     <Compile Include="Models\ViewModel\vRegister.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
