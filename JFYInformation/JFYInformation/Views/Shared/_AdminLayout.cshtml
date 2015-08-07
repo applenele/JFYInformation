@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>金枫页 - 后台管理</title>
+    <title>金枫叶 - 后台管理</title>
     <link href="~/Styles/common.css" rel="stylesheet" />
     <link href="~/Styles/main.css" rel="stylesheet" />
 
@@ -43,19 +43,37 @@
             <div class="sidebar-content">
                 <ul class="sidebar-list">
                     <li>
-                        <a id="New_Manager" style="cursor:pointer"><i class="icon-font">&#xe001;</i>公司管理</a>
-                        <ul class="sub-menu" id="new_manager_ul" style="display:none">
+                        <a id="company_Manager" style="cursor:pointer"><i class="icon-font">&#xe001;</i>公司管理</a>
+                        <ul class="sub-menu" id="company_manager_ul" style="display:none">
                             <li><a href="/Company/Index"><i class="icon-font">&#xe017;</i>公司管理</a></li>
                             <li><a href="/Company/AddCompany"><i class="icon-font">&#xe026;</i>增加公司</a></li>
                         </ul>
                     </li>
                     <script>
-                        $("#New_Manager").click(function () {
-                            if ($("#new_manager_ul").css("display") == "none") {
-                                $("#new_manager_ul").show();
+                        $("#company_Manager").click(function () {
+                            if ($("#company_manager_ul").css("display") == "none") {
+                                $("#company_manager_ul").show();
                             }
                             else {
-                                $("#new_manager_ul").hide();
+                                $("#company_manager_ul").hide();
+                            }
+                        });
+                    </script>
+
+                    <li>
+                        <a id="user_setting" style="cursor:pointer"><i class="icon-font">&#xe001;</i>个人中心</a>
+                        <ul class="sub-menu" id="user_setting_ul" style="display:none">
+                            <li><a href="/User/Show/@user.ID"><i class="icon-font">&#xe017;</i>个人信息</a></li>
+                            <li><a href="/User/Edit/@user.ID"><i class="icon-font">&#xe026;</i>修改个人信息</a></li>
+                        </ul>
+                    </li>
+                    <script>
+                        $("#user_setting").click(function () {
+                            if ($("#user_setting_ul").css("display") == "none") {
+                                $("#user_setting_ul").show();
+                            }
+                            else {
+                                $("#user_setting_ul").hide();
                             }
                         });
                     </script>

@@ -125,6 +125,8 @@ namespace JFYInformation.Controllers
                     company.Industry = model.Industry;
                     company.Scale = model.Scale;
                     company.URL = model.URL;
+                    company.Phone = model.Phone;
+                    company.Source = model.Source;
                     company.Description = model.Description;
                     company.Property = model.Property;
                     db.SaveChanges();

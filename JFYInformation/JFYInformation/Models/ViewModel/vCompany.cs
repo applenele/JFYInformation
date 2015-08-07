@@ -48,7 +48,7 @@ namespace JFYInformation.Models.ViewModel
             this.CompanyName = model.CompanyName;
             this.Address = model.Address;
             this.Contacts = model.Contacts;
-            this.Phone = model.Source.Contains("58同城") ? "http://image.58.com/showphone.aspx?v=" + model.Phone : model.Phone;
+            this.Phone = (model.Source!=null && model.Source.Contains("58同城")) ? "http://image.58.com/showphone.aspx?v=" + model.Phone : model.Phone;
             this.Description = model.Description;
             this.Industry = model.Industry;
             this.URL = model.URL;

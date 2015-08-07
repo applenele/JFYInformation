@@ -1,4 +1,5 @@
-﻿using JFYInformation.Models.ViewModel;
+﻿using JFYInformation.Models;
+using JFYInformation.Models.ViewModel;
 using JFYInformation.Schmas;
 using System;
 using System.Collections.Generic;
@@ -78,5 +79,26 @@ namespace JFYInformation.Controllers
             return RedirectToAction("Login", "User");
         }
         #endregion
+        
+
+        /// <summary>
+        /// 用户展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Show(int id)
+        {
+            var user = db.Users.Find(id);
+            return View(new vUser(user));
+        }
+
+
+        [Authorize]
+        public ActionResult ShowPicture(int id)
+        {
+            User user = new User();
+            user = db.Users.Find(id);
+            return File(user.Picture, "image/jpg");
+        }
     }
 }

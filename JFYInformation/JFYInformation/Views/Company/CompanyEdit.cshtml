@@ -15,7 +15,7 @@
         <tr>
             <td class="row-title">公司名称</td>
             <td>
-                <input name="Username" value="@Model.CompanyName" class="textbox" />
+                <input name="CompanyName" value="@Model.CompanyName" class="textbox" />
             </td>
         </tr>
         <tr>
@@ -41,7 +41,7 @@
             <td>
                 <input name="Phone" class="textbox" />
                 原电话：
-                @if (Model.Source.Contains("58同城"))
+                @if (Model.Source !=null && Model.Source.Contains("58同城"))
                 {
                     <img src="http://image.58.com/showphone.aspx?v=@Model.Phone" alt="@Model.CompanyName" />
                 }
@@ -49,6 +49,14 @@
                 {
                     <span>@Model.Phone</span>
                 }
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">
+                来源
+            </td>
+            <td>
+                <input name="Source" value="@Model.Source" class="textbox" />
             </td>
         </tr>
         <tr>

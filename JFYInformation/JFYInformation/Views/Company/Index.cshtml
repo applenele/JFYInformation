@@ -52,7 +52,7 @@
                         <td>@item.CompanyName</td>
                         <td>@item.Scale</td>
                         <td>
-                            @if (item.Source.Contains("58同城"))
+                            @if (item.Source !=null && item.Source.Contains("58同城"))
                             {
                                 <img src="@item.Phone" alt="@item.CompanyName" />
                             }

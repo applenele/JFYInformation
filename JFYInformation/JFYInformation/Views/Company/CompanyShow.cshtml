@@ -33,7 +33,14 @@
             联系电话
         </td>
         <td>
-            <img src="@Model.Phone" alt="@Model.CompanyName" />
+            @if (Model.Source != null && Model.Source.Contains("58同城"))
+            {
+                <img src="@Model.Phone" alt="@Model.CompanyName" />
+            }
+            else
+            {
+                <span>@Model.Phone</span>
+            }
         </td>
     </tr>
     <tr>
