@@ -32,7 +32,7 @@ namespace JFYInformation.Controllers
             }
             if (!string.IsNullOrEmpty(Key))
             {
-                query = query.Where(c => c.CompanyName.Contains(City));
+                query = query.Where(c => c.CompanyName.Contains(Key));
             }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.CompanyCount = query.Count();
