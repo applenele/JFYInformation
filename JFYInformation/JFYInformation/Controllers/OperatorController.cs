@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace JFYInformation.Controllers
 {
+    [Authorize]
     public class OperatorController : BaseController
     {
         #region 管理员管理

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace JFYInformation.Controllers
 {
+    [Authorize]
     public class CompanyController : BaseController
     {
         // GET: Company
