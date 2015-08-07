@@ -6,9 +6,9 @@
 
 <div>
     <div class="result-title">
-        <h1 class="head-tietle">增加管理员</h1>
+        <h1 class="head-tietle">增加操作员</h1>
     </div>
-    @using (Html.BeginForm("AddOperator", "Admin", FormMethod.Post, new { id = "frmAddOperator" }))
+    @using (Html.BeginForm("AddOperator", "Operator", FormMethod.Post, new { id = "frmAddOperator" }))
     {
         @Html.AntiForgeryToken()
         <table class="detail-table">

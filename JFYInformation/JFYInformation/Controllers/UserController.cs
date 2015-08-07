@@ -1,4 +1,5 @@
 ﻿using JFYInformation.Models.ViewModel;
+using JFYInformation.Schmas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -63,5 +64,19 @@ namespace JFYInformation.Controllers
             }
             return View();
         }
+
+        #region 注销
+        /// <summary>
+        ///  注销 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [ValidateSID]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "User");
+        }
+        #endregion
     }
 }
