@@ -1,0 +1,49 @@
+﻿@model IEnumerable<JFYInformation.Models.User>
+@using JFYInformation.Models
+@{
+    ViewBag.Title = "操作员管理";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <div class="result-title">
+        <h1 class="head-tietle">操作员管理 <a href="/Admin/AddOperator">增加</a></h1>
+    </div>
+    <div class="result-content">
+        <form class="search">
+            检索：
+            <input type="text" name="Begin" class="textbox datetime nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
+            <input type="text" name="End" class="textbox datetime nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
+            <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
+            <input type="submit" class="btn btn-info" value="检索" />
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>用户名</td>
+                    <td>真实姓名</td>
+                    <td>角色</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.ID">
+                        <td>@item.ID</td>
+                        <td>@item.Username</td>
+                        <td>@item.RealName</td>
+                        <td>@CommonDisply.RoleDisply[item.RoleAsInt]</td>
+                        <td>
+                            <a href="/Operator/OperatorShow/@item.ID">详情</a>
+                            <a href="javascript:deleteDialog('/Operator//OperatorDelete/' + @item.ID + '?sid=@ViewBag.SID',@item.ID);">删除</a>
+                            <a href="/Operator/RoleUpdate/@item.ID">修改权限</a>
+                            <a href="/Operator/Update/OperatorPwd/@item.ID">密码重置</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
