@@ -14,7 +14,7 @@ namespace JFYInformation.Controllers
     public class CompanyController : BaseController
     {
         // GET: Company
-        public ActionResult Index(int? Statu, int? DealResult, string City, int p = 0)
+        public ActionResult Index(int? Statu, int? DealResult,string Key ,string City, int p = 0)
         {
             var query = db.Companies.AsEnumerable();
             List<vCompany> companies = new List<vCompany>();
@@ -29,6 +29,10 @@ namespace JFYInformation.Controllers
             if (!string.IsNullOrEmpty(City))
             {
                 query = query.Where(c => c.Source.Contains(City) || c.Address.Contains(City));
+            }
+            if (!string.IsNullOrEmpty(Key))
+            {
+                query = query.Where(c => c.CompanyName.Contains(City));
             }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.CompanyCount = query.Count();
