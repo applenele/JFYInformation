@@ -14,10 +14,14 @@ namespace JFYInformation.Controllers
     public class CompanyController : BaseController
     {
         // GET: Company
-        public ActionResult Index(int p = 0)
+        public ActionResult Index(int? Statu,int p = 0)
         {
             var query = db.Companies.AsEnumerable();
             List<vCompany> companies = new List<vCompany>();
+            if (Statu.HasValue)
+            {
+                query = query.Where(c => c.StatuAsInt == Statu);
+            }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
             foreach (var item in query)
