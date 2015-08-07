@@ -169,6 +169,9 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\PictureEdit.cshtml" />
     <Content Include="Views\User\PwdEdit.cshtml" />
+    <Content Include="Views\Operator\OperatorShow.cshtml" />
+    <Content Include="Views\Operator\RoleUpdate.cshtml" />
+    <Content Include="Views\Operator\UpdateOperatorPwd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

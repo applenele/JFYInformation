@@ -1,0 +1,25 @@
+﻿@model JFYInformation.Models.User
+@{
+    ViewBag.Title = "密码重置";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">@Model.Username - 密码重置</h1>
+
+@using (Html.BeginForm("UpdateOperatorPwd", "Operator", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="ID" value="@Model.ID" />
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">
+                密码
+            </td>
+            <td>
+                <input type="text" name="password" />
+            </td>
+        </tr>
+    </table>
+    <p>@Html.ValidationSummary(true)</p>
+    <p><input type="submit" value="保存" class="button blue" /></p>
+}

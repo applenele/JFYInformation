@@ -112,8 +112,7 @@ namespace JFYInformation.Controllers
         {
             User user = new User();
             user = db.Users.Find(id);
-            ViewBag.User = user;
-            return View();
+            return View(new vUser(user));
         }
         #endregion
 
@@ -128,8 +127,7 @@ namespace JFYInformation.Controllers
         {
             User user = new User();
             user = db.Users.Find(id);
-            ViewBag.User = user;
-            return View();
+            return View(user);
         }
         #endregion
 
@@ -141,14 +139,14 @@ namespace JFYInformation.Controllers
         /// <param name="uid"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateSID]
-        public ActionResult UpdateManagerPwd(string password, int uid)
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateOperatorPwd(string password, int id)
         {
             User user = new Models.User();
-            user = db.Users.Find(uid);
+            user = db.Users.Find(id);
             user.Password = Helpers.Encryt.GetMD5(password);
             db.SaveChanges();
-            return Redirect("/Admin/ManagerManage");
+            return Redirect("/Operator/OperatorManage");
         }
         #endregion
 
@@ -164,8 +162,7 @@ namespace JFYInformation.Controllers
         {
             User user = new User();
             user = db.Users.Find(id);
-            ViewBag.User = user;
-            return View();
+            return View(user);
         }
         #endregion
 
@@ -176,29 +173,17 @@ namespace JFYInformation.Controllers
         /// <param name="role"></param>
         /// <returns></returns>
         [HttpPost]
-        [ValidateSID]
-        public ActionResult RoleUpdate(Role role, int uid)
+        [ValidateAntiForgeryToken]
+        public ActionResult RoleUpdate(Role role, int id)
         {
             User user = new Models.User();
-            user = db.Users.Find(uid);
+            user = db.Users.Find(id);
             user.Role = role;
             db.SaveChanges();
-            return Redirect("/Admin/ManagerManage");
+            return Redirect("/Operator/OperatorManage");
         }
         #endregion
 
-        #region 管理员消息
-        /// <summary>
-        ///  消息
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult AdminMessage(string msg)
-        {
-            ViewBag.Msg = msg;
-            return View();
-        }
-        #endregion
 
     }
 }

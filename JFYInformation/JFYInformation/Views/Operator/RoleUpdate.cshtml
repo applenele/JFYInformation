@@ -1,0 +1,30 @@
+﻿@model JFYInformation.Models.User
+@{
+    ViewBag.Title = "角色修改";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">@Model.Username -  角色修改</h1>
+
+@using (Html.BeginForm("RoleUpdate", "Operator", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<input type="hidden" name="ID" value="@Model.ID" />
+
+<table class="detail-table">
+    <tr>
+        <td class="row-title">
+            角色
+        </td>
+        <td>
+            <select name="role" class="textbox">
+                <option value="Clerk" @(Model.RoleAsInt == 0?"selected":"")>职员</option>
+                <option value="Manager" @(Model.RoleAsInt == 1?"selected":"")>经理</option>
+                <option value="System" @(Model.RoleAsInt == 2?"selected":"")>系统管理员</option>
+            </select>
+        </td>
+    </tr>
+</table>
+<p>@Html.ValidationSummary(true)</p>
+<p><input type="submit" value="保存" class="button blue" /></p>
+}

@@ -1,0 +1,75 @@
+﻿@model JFYInformation.Models.ViewModel.vUser
+@{
+    ViewBag.Title = "个人信息展示";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">个人信息展示 <small><a href="/Operator/OperatorManage">操作员管理</a></small></h1>
+<table class="detail-table">
+    <tr>
+        <td class="row-title">用户名</td>
+        <td>
+            @Model.Username
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            角色
+        </td>
+        <td>
+            @Model.Role
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            图片
+        </td>
+        <td>
+            @if (@Model.Picture == null)
+            {
+                <img src="/Images/userphoto.png" width="50" height="50"
+                     alt=@Model.Username style="border-radius:50%;" />
+            }
+            else
+            {
+                <img src="/User/ShowPicture/@Model.ID" width="50"
+                     alt=@Model.Username height="50" style="border-radius:50%;" />
+            }
+
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            联系电话
+        </td>
+        <td>
+            @Model.Phone
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            地址
+        </td>
+        <td>
+            @Model.Address
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            真实姓名
+        </td>
+        <td>
+            @Model.RealName
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            增加时间
+        </td>
+        <td>
+            @Model.Time
+        </td>
+    </tr>
+</table>
+
+
