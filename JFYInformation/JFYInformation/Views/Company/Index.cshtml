@@ -1,13 +1,11 @@
-﻿@model IEnumerable<JFYInformation.Models.User>
-@using JFYInformation.Models
+﻿@model IEnumerable<JFYInformation.Models.Company>
 @{
-    ViewBag.Title = "操作员管理";
+    ViewBag.Title = "公司管理";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 <div>
     <div class="result-title">
-        <h1 class="head-tietle">操作员管理 <a href="/Admin/AddOperator">增加</a></h1>
+        <h1 class="head-tietle">公司管理 <a href="/Admin/AddCompany">增加</a></h1>
     </div>
     <div class="result-content">
         <form class="search">
@@ -21,9 +19,11 @@
             <thead>
                 <tr>
                     <td>编号</td>
-                    <td>用户名</td>
-                    <td>真实姓名</td>
-                    <td>角色</td>
+                    <td>公司名</td>
+                    <td>行业</td>
+                    <td>规模</td>
+                    <td>电话</td>
+                    <td>来源</td>
                     <td>操作</td>
                 </tr>
             </thead>
@@ -32,14 +32,15 @@
                 {
                     <tr id="@item.ID">
                         <td>@item.ID</td>
-                        <td>@item.Username</td>
-                        <td>@item.RealName</td>
-                        <td>@CommonDisply.RoleDisply[item.RoleAsInt]</td>
+                        <td>@item.CompanyName</td>
+                        <td>@item.Industry</td>
+                        <td>@item.Scale</td>
+                        <td><img src="http://image.58.com/showphone.aspx?v=@item.Phone" alt="@item.CompanyName" /></td>
+                        <td>@item.Source</td>
                         <td>
-                            <a href="/Operator/OperatorShow/@item.ID">详情</a>
-                            <a href="javascript:deleteDialog('/Operator//OperatorDelete/' + @item.ID + '?sid=@ViewBag.SID',@item.ID);">删除</a>
-                            <a href="/Operator/RoleUpdate/@item.ID">修改权限</a>
-                            <a href="/Operator/Update/OperatorPwd/@item.ID">密码重置</a>
+                            <a href="/Company/CompanyShow/@item.ID">详情</a>
+                            <a href="javascript:deleteDialog('/Company/CompanyDelete/' + @item.ID + '?sid=@ViewBag.SID',@item.ID);">删除</a>
+                            <a href="/Company/CompanyEdit/@item.ID">修改</a>
                         </td>
                     </tr>
                 }
@@ -48,3 +49,4 @@
         </table>
     </div>
 </div>
+
