@@ -1,4 +1,4 @@
-﻿@model IEnumerable<JFYInformation.Models.Company>
+﻿@model IEnumerable<JFYInformation.Models.ViewModel.vCompany>
 @{
     ViewBag.Title = "公司管理";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -23,6 +23,7 @@
                     <td>规模</td>
                     <td>电话</td>
                     <td>来源</td>
+                    <td>处理状态</td>
                     <td>操作</td>
                 </tr>
             </thead>
@@ -33,12 +34,32 @@
                         <td>@item.ID</td>
                         <td>@item.CompanyName</td>
                         <td>@item.Scale</td>
-                        <td><img src="http://image.58.com/showphone.aspx?v=@item.Phone" alt="@item.CompanyName" /></td>
+                        <td>
+                            @if (item.Source.Contains("58同城"))
+                            {
+                                <img src="@item.Phone" alt="@item.CompanyName" />
+                            }
+                            else
+                            {
+                                @item.Phone;
+                            }
+                        </td>
                         <td>@item.Source</td>
+                        <td>
+                            @if (item.StatuAsInt == 2)
+                            {
+                               <span class="red">@item.Statu</span>
+                            }
+                            else
+                            {
+                                <span class="blue">@item.Statu</span>
+                            }
+                        </td>
                         <td>
                             <a href="/Company/CompanyShow/@item.ID">详情</a>
                             <a href="javascript:deleteDialog('/Company/CompanyDelete/' + @item.ID + '?sid=@ViewBag.SID',@item.ID);">删除</a>
                             <a href="/Company/CompanyEdit/@item.ID">修改</a>
+                            <a href="javascript:dealDialog(@item.ID)">处理</a>
                         </td>
                     </tr>
                 }
@@ -47,4 +68,3 @@
         @Html.MakePager()
     </div>
 </div>
-

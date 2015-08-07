@@ -17,10 +17,14 @@ namespace JFYInformation.Controllers
         public ActionResult Index(int p = 0)
         {
             var query = db.Companies.AsEnumerable();
-
+            List<vCompany> companies = new List<vCompany>();
             query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
-            return View(query);
+            foreach (var item in query)
+            {
+                companies.Add(new vCompany(item));
+            }
+            return View(companies);
         }
 
 
@@ -60,12 +64,38 @@ namespace JFYInformation.Controllers
             return View(new vCompany(company));
         }
 
+        /// <summary>
+        /// 处理
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        public ActionResult CompanyDeal(int id, int result)
+        {
+            try
+            {
+                var company = db.Companies.Find(id);
+                company.StatuAsInt = 2;
+                company.DealResultAsInt = result;
+                db.SaveChanges();
+                return Content("ok");
+            }
+            catch
+            {
+                return Content("处理出错！");
+            }
+
+        }
+
         [HttpGet]
         public ActionResult CompanyEdit(int id)
         {
             Company company = new Company();
+
             return View(company);
         }
+
+
 
 
     }

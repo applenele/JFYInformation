@@ -43,3 +43,31 @@ function deleteDialog(url, id) {
     $('body').append(dom);
     setTimeout(function () { dom.addClass('active'); }, 10);
 }
+
+
+//执行公司处理
+function postDeal(id,real) {
+    var url = "/Company/CompanyDeal/" + id + "?result=" + $("#sldeal").val();
+    $.post(url, function (data) {
+        if (data == 'ok' || data == 'OK')
+            popMsg('处理成功');
+        else
+            popMsg(data);
+        closeDialog();
+    });
+}
+
+//公司处理
+function dealDialog(id,name) {
+    var html = '<div class="dialog">' +
+        '<h3 class="dialog-title">提示</h3>' +
+        '<p>公司处理</p>' +
+        '<select name="sldeal" id="sldeal" class="textbox"><option value="1">通过</option><option value="2">拒绝</option>' +
+        '</select><div class="dialog-buttons"><a href="javascript:postDeal(\'' + id + '\')" class="button blue">处理</a> <a href="javascript:closeDialog()" class="button blue">取消</a></div>' +
+        '</div>';
+    var dom = $(html);
+    dom.css('margin-left', -(dom.outerWidth() / 2));
+    $('body').append(dom);
+    setTimeout(function () { dom.addClass('active'); }, 10);
+}
+

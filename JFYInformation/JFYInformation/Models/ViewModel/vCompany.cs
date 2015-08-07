@@ -33,6 +33,7 @@ namespace JFYInformation.Models.ViewModel
 
         public string Statu { set; get; }
 
+        public int StatuAsInt { get; set; }
 
         public string Source { set; get; }
 
@@ -54,6 +55,8 @@ namespace JFYInformation.Models.ViewModel
             this.Property = model.Property;
             this.Scale = model.Scale;
             this.Time = model.Time;
+            this.Source = model.Source;
+            this.StatuAsInt = model.StatuAsInt;
             this.Statu = CommonDisply.CompanyStatuDisply[model.StatuAsInt];
             this.DealResult = CommonDisply.DealResultDisply[model.DealResultAsInt];
         }
