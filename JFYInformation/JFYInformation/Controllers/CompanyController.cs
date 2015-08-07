@@ -1,4 +1,5 @@
 ﻿using JFYInformation.Helpers;
+using JFYInformation.Schmas;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,44 @@ namespace JFYInformation.Controllers
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
             return View(query);
         }
+
+
+        #region 公司删除
+        /// <summary>
+        /// 公司删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateSID]
+        public ActionResult CompanyDelete(int id)
+        {
+            try
+            {
+                var company = db.Companies.Find(id);
+                db.Companies.Remove(company);
+                db.SaveChanges();
+                return Content("ok");
+            }
+            catch
+            {
+                return Content("err");
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 公司展示
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult CompanyShow(int id)
+        {
+            var company = db.Companies.Find(id);
+            return View(company);
+        }
+
+
     }
 }

@@ -158,6 +158,8 @@
     <Content Include="Views\Operator\AddOperator.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="fonts\icomoon.ttf" />
+    <Content Include="fonts\icomoon.woff" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
