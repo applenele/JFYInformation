@@ -60,6 +60,14 @@ namespace JFYInformation.Models
 
         public string Source { set; get; }
 
+        public int DealResultAsInt { set; get; }
+
+        public DealResult DealResult
+        {
+            set { DealResultAsInt = (int)value; }
+            get { return (DealResult)DealResultAsInt; }
+        }
+
         public CompanyStatu CompanyStatu
         {
             set { StatuAsInt = (int)value; }

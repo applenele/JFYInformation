@@ -11,5 +11,7 @@ namespace JFYInformation.Models
     {
         public DB() : base("sqlserverdb") { }
         public DbSet<Company> Companies { set; get; }
+
+        public DbSet<User> Users { set; get; }
     }
 }
