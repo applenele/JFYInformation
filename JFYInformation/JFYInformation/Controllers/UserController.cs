@@ -32,6 +32,7 @@ namespace JFYInformation.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(vLogin model)
         {
             if (ModelState.IsValid)

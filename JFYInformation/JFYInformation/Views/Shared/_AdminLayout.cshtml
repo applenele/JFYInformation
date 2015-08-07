@@ -11,7 +11,7 @@
     <link href="~/Styles/admin.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
-
+    <script src="~/Scripts/jfy.js"></script>
 </head>
 <body>
     <div class="topbar-wrap white">
@@ -51,14 +51,14 @@
                         </ul>
                     </li>
                     <script>
-                            $("#New_Manager").click(function () {
-                                if ($("#new_manager_ul").css("display") == "none") {
-                                    $("#new_manager_ul").show();
-                                }
-                                else {
-                                    $("#new_manager_ul").hide();
-                                }
-                            });
+                        $("#New_Manager").click(function () {
+                            if ($("#new_manager_ul").css("display") == "none") {
+                                $("#new_manager_ul").show();
+                            }
+                            else {
+                                $("#new_manager_ul").hide();
+                            }
+                        });
                     </script>
 
                     @if (user.Role == Role.System)

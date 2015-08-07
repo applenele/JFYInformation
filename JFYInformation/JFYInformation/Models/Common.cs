@@ -16,10 +16,10 @@ namespace JFYInformation.Models
 
     public class CommonDisply
     {
-        public string[] CompanyStatuDisply = new string[] { "未处理", "锁定", "处理" };
+        public static string[] CompanyStatuDisply = new string[] { "未处理", "锁定", "处理" };
 
-        public string[] RoleDisply = new string[] { "职员", "经理", "管理员" };
+        public static string[] RoleDisply = new string[] { "职员", "经理", "管理员" };
 
-        public string[] DealResultDisply = new string[] { "未处理", "通过", "拒绝" };
+        public static string[] DealResultDisply = new string[] { "未处理", "通过", "拒绝" };
     }
 }

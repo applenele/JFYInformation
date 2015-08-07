@@ -24,8 +24,9 @@ namespace JFYInformation.Models.ViewModel
         public string Confirm { get; set; }
 
 
-        [Display(Name = "记住我")]
-        public bool Remember { get; set; }
+        [Display(Name = "角色")]
+
+        public Role Role { set; get; }
 
 
     }

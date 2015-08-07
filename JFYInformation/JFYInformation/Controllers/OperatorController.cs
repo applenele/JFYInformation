@@ -1,5 +1,6 @@
 ﻿using JFYInformation.Helpers;
 using JFYInformation.Models;
+using JFYInformation.Models.ViewModel;
 using JFYInformation.Schmas;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,17 @@ namespace JFYInformation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult OperatorManage(string key, int p = 1)
+        public ActionResult OperatorManage(string key, DateTime? Begin, DateTime? End, int p = 1)
         {
             var query = db.Users.OrderBy(u => u.ID).AsEnumerable();
+            if (Begin.HasValue)
+            {
+                query = query.Where(c => c.Time >= Begin);
+            }
+            if (End.HasValue)
+            {
+                query = query.Where(c => c.Time <= End);
+            }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
             return View(query);
@@ -32,7 +41,7 @@ namespace JFYInformation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult AddManager()
+        public ActionResult AddOperator()
         {
             return View();
         }
@@ -44,24 +53,45 @@ namespace JFYInformation.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public ActionResult AddManager(User model)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddOperator(vRegister model)
         {
-            model.Password = Helpers.Encryt.GetMD5(model.Password);
-            db.Users.Add(model);
-            db.SaveChanges();
-            return Redirect("/Admin/ManagerManage");
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var user = new User();
+                    user.Username = model.Username;
+                    user.Password = Helpers.Encryt.GetMD5(model.Password);
+                    user.Role = model.Role;
+                    user.Time = DateTime.Now;
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return Redirect("/Operator/OperatorManage");
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "增加操作员出错！");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "信息填写错误！");
+            }
+            return View();
         }
         #endregion
 
-        #region 管理员删除
+        #region 操作员删除
         /// <summary>
-        ///  删除管理员
+        ///  操作员删除
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateSID]
-        public ActionResult ManagerDelete(int id)
+        public ActionResult OperatorDelete(int id)
         {
             User user = new User();
             user = db.Users.Find(id);
@@ -71,13 +101,13 @@ namespace JFYInformation.Controllers
         }
         #endregion
 
-        #region 管理员展示
+        #region 操作员展示
         /// <summary>
-        ///  管理员展示
+        ///  操作员展示
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult ManagerShow(int id)
+        public ActionResult OperatorShow(int id)
         {
             User user = new User();
             user = db.Users.Find(id);
@@ -86,14 +116,14 @@ namespace JFYInformation.Controllers
         }
         #endregion
 
-        #region 管理员密码重置
+        #region 操作员密码重置
         /// <summary>
-        ///  管理员密码重置
+        ///  操作员密码重置
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult UpdateManagerPwd(int id)
+        public ActionResult UpdateOperatorPwd(int id)
         {
             User user = new User();
             user = db.Users.Find(id);

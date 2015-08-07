@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "增加操作员";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div>
+    <div class="result-title">
+        <h1 class="head-tietle">增加管理员</h1>
+    </div>
+    @using (Html.BeginForm("AddOperator", "Admin", FormMethod.Post, new { id = "frmAddOperator" }))
+    {
+        @Html.AntiForgeryToken()
+        <table class="detail-table">
+            <tr>
+                <td class="row-title">用户名</td>
+                <td>
+                    <input type="text" class="textbox w-2" name="Username" />
+                </td>
+            </tr>
+            <tr>
+                <td class="row-title">密码</td>
+                <td>
+                    <input type="password" name="Password" id="txtPassword" class="textbox w-2" />
+                </td>
+            </tr>
+            <tr>
+                <td class="row-title">密码重复</td>
+                <td>
+                    <input type="password" id="txtPasswordConfirm" name="Confirm" class="textbox w-2" />
+                </td>
+            </tr>
+            <tr>
+                <td class="row-title">
+                    角色
+                </td>
+                <td>
+                    <select name="Role" class="textbox">
+                        <option value="System">管理员</option>
+                        <option value="Manager">经理</option>
+                        <option value="Clerk">职员</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <p><input type="submit" value="增加" class="button blue" /></p>
+    }
+</div>
