@@ -14,9 +14,21 @@
             <input type="text" name="End" class="textbox datetime nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
             <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
             <select class="textbox" name="Statu">
+                <option value="">处理状态</option>
                 <option value="0">未处理</option>
                 <option value="1">锁定</option>
                 <option value="2">处理</option>
+            </select>
+            <select class="textbox" name="DealResult">
+                <option value="">处理结果</option>
+                <option value="0">未处理</option>
+                <option value="1">通过</option>
+                <option value="2">拒绝</option>
+            </select>
+            <select class="textbox" name="City">
+                <option value="">选择城市</option>
+                <option value="随州">随州</option>
+                <option value="武汉">武汉</option>
             </select>
             <input type="submit" class="btn btn-info" value="检索" />
         </form>
@@ -53,7 +65,7 @@
                         <td>
                             @if (item.StatuAsInt == 2)
                             {
-                               <span class="red">@item.Statu</span>
+                                <span class="red">@item.Statu</span>
                             }
                             else
                             {
