@@ -9,5 +9,18 @@
 @using (Html.BeginForm("PictureEdit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" name="ID" />
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">
+                上传图像
+            </td>
+            <td>
+                <input type="file" name="file" id="file" class="textbox" />
+            </td>
+        </tr>
+    </table>
+    <p>@Html.ValidationSummary(true)</p>
+    <p><input type="submit" value="增加" class="button blue" /></p>
 }

@@ -43,6 +43,8 @@ namespace JFYInformation.Models.ViewModel
             this.Phone = model.Phone;
             this.Address = model.Address;
             this.RoleAsInt = model.RoleAsInt;
+            this.Picture = model.Picture;
+            this.ID = model.ID;
         }
     }
 }

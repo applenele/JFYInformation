@@ -135,6 +135,7 @@ namespace JFYInformation.Controllers
         }
         #endregion
 
+        #region 图片修改
         /// <summary>
         ///  图片修改
         /// </summary>
@@ -145,5 +146,79 @@ namespace JFYInformation.Controllers
             var user = db.Users.Find(id);
             return View(user);
         }
+
+
+        /// <summary>
+        /// 修改图像
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult PictureEdit(HttpPostedFileBase file, int ID)
+        {
+            var user = db.Users.Find(ID);
+            try
+            {
+                System.IO.Stream stream = file.InputStream;
+                byte[] buffer = new byte[stream.Length];
+                stream.Read(buffer, 0, (int)stream.Length);
+                stream.Close();
+                user.Picture = buffer;
+                db.SaveChanges();
+                return Redirect("/User/Show/" + ID);
+            }
+            catch
+            {
+                return View(user);
+            }
+        }
+
+        #endregion
+
+
+        #region 修改密码
+        /// <summary>
+        //  修改密码
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PwdEdit(int id)
+        {
+            var user = db.Users.Find(id);
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult PwdEdit(string old, string newpwd, string confirm, int id)
+        {
+            var user = db.Users.Find(id);
+            if (user.Password != Helpers.Encryt.GetMD5(old))
+            {
+                ModelState.AddModelError("", "原始密码不正确！");
+            }
+            else
+            {
+                if (newpwd != confirm)
+                {
+                    ModelState.AddModelError("", "两次输入密码不一致");
+                }
+                else
+                {
+                    user.Password = Helpers.Encryt.GetMD5(newpwd);
+                    db.SaveChanges();
+                    return Redirect("/User/Show/" + id);
+                }
+            }
+
+            return View(user);
+        } 
+        #endregion
+
+
+
     }
 }

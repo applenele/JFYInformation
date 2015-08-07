@@ -1,0 +1,42 @@
+﻿@model JFYInformation.Models.User
+@{
+    ViewBag.Title = "图片修改";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">密码修改</h1>
+
+@using (Html.BeginForm("PwdEdit", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="ID" value="@Model.ID" />
+
+    <table class="detail-table">
+        <tr>
+            <td class="row-title">
+             原始密码
+            </td>
+            <td>
+                <input type="password" name="old"  class="textbox" />
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">
+                新密码
+            </td>
+            <td>
+                <input type="password" name="newpwd" class="textbox" />
+            </td>
+        </tr>
+        <tr>
+            <td class="row-title">
+                新密码重复
+            </td>
+            <td>
+                <input type="password" name="confirm" class="textbox" />
+            </td>
+        </tr>
+    </table>
+    <p>@Html.ValidationSummary(true)</p>
+    <p><input type="submit" value="增加" class="button blue" /></p>
+}
