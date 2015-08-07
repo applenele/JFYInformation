@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -62,12 +63,14 @@ namespace JFYInformation.Models
 
         public int DealResultAsInt { set; get; }
 
+        [NotMapped]
         public DealResult DealResult
         {
             set { DealResultAsInt = (int)value; }
             get { return (DealResult)DealResultAsInt; }
         }
 
+        [NotMapped]
         public CompanyStatu CompanyStatu
         {
             set { StatuAsInt = (int)value; }
