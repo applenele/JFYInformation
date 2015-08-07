@@ -1,0 +1,13 @@
+﻿@model JFYInformation.Models.User
+@{
+    ViewBag.Title = "图片修改";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">图片修改</h1>
+
+@using (Html.BeginForm("PictureEdit", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="ID" />
+}

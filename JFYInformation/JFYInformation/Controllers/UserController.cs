@@ -101,6 +101,7 @@ namespace JFYInformation.Controllers
             return File(user.Picture, "image/jpg");
         }
 
+        #region 修改信息
         /// <summary>
         /// 修改信息
         /// </summary>
@@ -124,12 +125,24 @@ namespace JFYInformation.Controllers
                 user.Address = model.Address;
                 user.RealName = model.RealName;
                 db.SaveChanges();
-                return Redirect("/User/Show/"+model.ID);
+                return Redirect("/User/Show/" + model.ID);
             }
             else
             {
-                ModelState.AddModelError("","信息填写错误！");
+                ModelState.AddModelError("", "信息填写错误！");
             }
+            return View(user);
+        }
+        #endregion
+
+        /// <summary>
+        ///  图片修改
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult PictureEdit(int id)
+        {
+            var user = db.Users.Find(id);
             return View(user);
         }
     }
