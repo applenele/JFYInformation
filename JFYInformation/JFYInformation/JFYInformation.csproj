@@ -108,6 +108,7 @@
     </Compile>
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\StringHelper.cs" />
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Company.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
