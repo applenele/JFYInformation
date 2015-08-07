@@ -1,6 +1,6 @@
 ﻿@using JFYInformation.Models;
 @{
-    User user = ViewBag.Currentuser as User;
+    User user = ViewBag.CurrentUser as User;
 }
 <!doctype html>
 <html>
@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>金枫页 - 后台管理</title>
     <link href="~/Styles/common.css" rel="stylesheet" />
-    <link href="~/Styles/admin.css" rel="stylesheet" />
+    <link href="~/Styles/main.css" rel="stylesheet" />
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/jfy.js"></script>
@@ -45,9 +45,8 @@
                     <li>
                         <a id="New_Manager" style="cursor:pointer"><i class="icon-font">&#xe001;</i>公司管理</a>
                         <ul class="sub-menu" id="new_manager_ul" style="display:none">
-                            <li><a href="/Admin/NewsManager"><i class="icon-font">&#xe017;</i>新闻管理</a></li>
-                            <li><a href="/Admin/AddNews"><i class="icon-font">&#xe026;</i>增加新闻</a></li>
-                            <li><a href="/Admin/TypeManager?type=0"><i class="icon-font">&#xe018;</i>分类管理</a></li>
+                            <li><a href="/Company/Index"><i class="icon-font">&#xe017;</i>公司管理</a></li>
+                            <li><a href="/Company/AddCompany"><i class="icon-font">&#xe026;</i>增加新闻</a></li>
                         </ul>
                     </li>
                     <script>
@@ -67,8 +66,8 @@
                         <li>
                             <a id="Manager_Manager" style="cursor:pointer"><i class="icon-font">&#xe057;</i>系统设置</a>
                             <ul class="sub-menu" id="manager_manager_ul" style="display:none">
-                                <li><a href="/Admin/ManagerManage"><i class="icon-font">&#xe014;</i>职员管理</a></li>
-                                <li><a href="/Admin/AddManager"><i class="icon-font">&#xe018;</i>增加职员</a></li>
+                                <li><a href="/Operator/OperatorManage"><i class="icon-font">&#xe014;</i>职员管理</a></li>
+                                <li><a href="/Operator/AddOperator"><i class="icon-font">&#xe018;</i>增加职员</a></li>
                             </ul>
                         </li>
                         <script>
@@ -102,6 +101,10 @@
             </div>
         </div>
         <!--/main-->
+
+        <div class="wrap-footer wrap-box container">
+            <p>&copy; 2015 Powered by <a href="http://weibo.com/nele0716" target="_blank">nele</a></p>
+        </div>
     </div>
 </body>
 </html>

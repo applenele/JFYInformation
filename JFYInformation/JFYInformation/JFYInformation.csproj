@@ -157,6 +157,7 @@
     <Content Include="Views\Operator\OperatorManage.cshtml" />
     <Content Include="Views\Operator\AddOperator.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

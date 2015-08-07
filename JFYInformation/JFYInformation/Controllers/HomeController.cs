@@ -12,7 +12,7 @@ using System.Web.Mvc;
 namespace JFYInformation.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         // GET: Home
         public ActionResult Index()

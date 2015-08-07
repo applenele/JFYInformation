@@ -20,7 +20,6 @@
                 <tr>
                     <td>编号</td>
                     <td>公司名</td>
-                    <td>行业</td>
                     <td>规模</td>
                     <td>电话</td>
                     <td>来源</td>
@@ -33,7 +32,6 @@
                     <tr id="@item.ID">
                         <td>@item.ID</td>
                         <td>@item.CompanyName</td>
-                        <td>@item.Industry</td>
                         <td>@item.Scale</td>
                         <td><img src="http://image.58.com/showphone.aspx?v=@item.Phone" alt="@item.CompanyName" /></td>
                         <td>@item.Source</td>
@@ -45,8 +43,8 @@
                     </tr>
                 }
             </tbody>
-            @Html.MakePager()
         </table>
+        @Html.MakePager()
     </div>
 </div>
 

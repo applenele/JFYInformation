@@ -39,7 +39,8 @@ namespace JFYInformation.Controllers
             {
                 try
                 {
-                    var user = db.Users.Where(u => u.Username == model.Username.Trim() && u.Password == Helpers.Encryt.GetMD5(model.Password.Trim())).FirstOrDefault();
+                    model.Password = Helpers.Encryt.GetMD5(model.Password.Trim());
+                    var user = db.Users.Where(u => u.Username == model.Username.Trim() && u.Password == model.Password).FirstOrDefault();
                     if (user == null)
                     {
                         ModelState.AddModelError("", "用户或密码不正确！");
