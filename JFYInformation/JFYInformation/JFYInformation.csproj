@@ -161,6 +161,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\icomoon.ttf" />
     <Content Include="fonts\icomoon.woff" />
+    <Content Include="Views\Company\CompanyShow.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

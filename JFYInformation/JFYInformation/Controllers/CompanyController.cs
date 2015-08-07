@@ -1,4 +1,6 @@
 ﻿using JFYInformation.Helpers;
+using JFYInformation.Models;
+using JFYInformation.Models.ViewModel;
 using JFYInformation.Schmas;
 using System;
 using System.Collections.Generic;
@@ -55,6 +57,13 @@ namespace JFYInformation.Controllers
         public ActionResult CompanyShow(int id)
         {
             var company = db.Companies.Find(id);
+            return View(new vCompany(company));
+        }
+
+        [HttpGet]
+        public ActionResult CompanyEdit(int id)
+        {
+            Company company = new Company();
             return View(company);
         }
 

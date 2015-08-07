@@ -1,0 +1,96 @@
+﻿@model JFYInformation.Models.ViewModel.vCompany
+@{
+    ViewBag.Title = "公司展示";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="head-tietle">@Model.CompanyName - 公司展示 <a href="/Company/CompanyEdit/@Model.ID">修改</a></h1>
+<table class="detail-table">
+    <tr>
+        <td class="row-title">公司名称</td>
+        <td>
+             @Model.CompanyName
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            地址
+        </td>
+        <td>
+            @Model.Address
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+           联系人
+        </td>
+        <td>
+            @Model.Contacts
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            联系电话
+        </td>
+        <td>
+            <img src="@Model.Phone" alt="@Model.CompanyName" />
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            描述
+        </td>
+        <td>
+            @Model.Description
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            行业
+        </td>
+        <td>
+            @Model.Industry
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            URl
+        </td>
+        <td>
+            @Model.URL
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            公司性质
+        </td>
+        <td>
+            @Model.Property
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            公司规模
+        </td>
+        <td>
+            @Model.Scale
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            状态
+        </td>
+        <td>
+            @Model.Statu
+        </td>
+    </tr>
+    <tr>
+        <td class="row-title">
+            处理结果
+        </td>
+        <td>
+            @Model.DealResult
+        </td>
+    </tr>
+</table>
+
