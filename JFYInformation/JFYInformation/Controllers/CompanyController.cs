@@ -157,6 +157,11 @@ namespace JFYInformation.Controllers
             return View(company);
         }
 
+        /// <summary>
+        /// 公司编辑
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult CompanyEdit(Company model)
@@ -191,5 +196,37 @@ namespace JFYInformation.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public ActionResult AddCompany()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddCompany(Company model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    model.Time = DateTime.Now;
+                    db.Companies.Add(model);
+                    db.SaveChanges();
+                    return Redirect("/Company/Index");
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "添加出错！");
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "信息填写错误");
+            }
+            return View();
+        }
     }
 }

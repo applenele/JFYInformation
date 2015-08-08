@@ -190,6 +190,7 @@
     <Content Include="Views\System\AddCity.cshtml" />
     <None Include="Properties\PublishProfiles\nele-jfy.pubxml" />
     <Content Include="Views\System\DealResult.cshtml" />
+    <Content Include="Views\Company\AddCompany.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
