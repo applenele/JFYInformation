@@ -1,6 +1,7 @@
 ﻿@using PagedList
 @using PagedList.Mvc
 @model IEnumerable<JFYInformation.Models.DealRecord>
+@using JFYInformation.Models
 @{
     ViewBag.Title = "处理结果";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -12,8 +13,8 @@
     <div class="result-content">
         <form class="search">
             检索：
-            <input type="text" name="Begin" class="textbox date nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
-            <input type="text" name="End" class="textbox date nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
+            <input type="text" name="Begin" class="textbox date nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" onclick="SetDate()" />
+            <input type="text" name="End" class="textbox date nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" onclick="SetDate()" />
             <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
             <select class="textbox" name="DealResult">
                 <option value="">处理结果</option>
@@ -41,13 +42,13 @@
                         <td>@item.ID</td>
                         <td>@item.Company.CompanyName</td>
                         <td>@item.User.Username</td>
-                        <td>@item.DealResult</td>
+                        <td>@CommonDisply.DealResultDisply[item.DealResultAsInt]</td>
                         <td>@item.Hint</td>
                     </tr>
                 }
             </tbody>
         </table>
-      @Html.PagedListPager((IPagedList)Model, page => Url.Action("DealResult?Key=" + @Request.QueryString["Key"], new { page = page }))
+      @Html.PagedListPager((IPagedList)Model, page => Url.Action("DealResult", new { page = page,  Begin = Request.QueryString["Begin"], End = Request.QueryString["End"],  DealResult = Request.QueryString["DealResult"], Key = Request.QueryString["Key"] }))
     </div>
 </div>
 

@@ -71,7 +71,7 @@ function dealDialog(id, name) {
     setTimeout(function () { dom.addClass('active'); }, 10);
 }
 
-function date() {
+function SetDate() {
     $('.date').datetimepicker({
         format: 'Y/m/d',
         timepicker: false,

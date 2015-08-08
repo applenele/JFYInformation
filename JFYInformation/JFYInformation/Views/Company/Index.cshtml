@@ -13,8 +13,8 @@
     <div class="result-content">
         <form class="search">
             检索：
-            <input type="text" name="Begin" class="textbox datetime nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
-            <input type="text" name="End" class="textbox datetime nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
+            <input type="text" name="Begin" class="textbox date nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" onclick="SetDate()" />
+            <input type="text" name="End" class="textbox date nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" onclick="SetDate()"  />
             <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
             <select class="textbox" name="Statu">
                 <option value="">处理状态</option>
@@ -88,7 +88,6 @@
                 }
             </tbody>
         </table>
-     
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index?City="+ @Request.QueryString["City"], new { page = page }))
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page,City = Request.QueryString["City"],Begin = Request.QueryString["Begin"], End = Request.QueryString["End"], Statu = Request.QueryString["Statu"], DealResult = Request.QueryString["DealResult"],Key = Request.QueryString["Key"] }))
     </div>
 </div>
