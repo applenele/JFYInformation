@@ -1,4 +1,6 @@
-﻿@model IEnumerable<JFYInformation.Models.ViewModel.vCompany>
+﻿@model PagedList.StaticPagedList<JFYInformation.Models.ViewModel.vCompany>
+@using PagedList
+@using PagedList.Mvc
 @using JFYInformation.Models;
 @{
     ViewBag.Title = "公司管理";
@@ -34,6 +36,7 @@
                 }
             </select>
             <input type="submit" class="btn btn-info" value="检索" />
+            <span class="pagination">共：@ViewBag.CompanyCount 条数据</span>
         </form>
         <table class="table">
             <thead>
@@ -85,6 +88,7 @@
                 }
             </tbody>
         </table>
-        <span class="pager-item" style="margin-top:20px;">共：@ViewBag.CompanyCount 条数据</span>@Html.MakePager()
+     
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
     </div>
 </div>

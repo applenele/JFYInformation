@@ -2,6 +2,7 @@
 using JFYInformation.Models;
 using JFYInformation.Models.ViewModel;
 using JFYInformation.Schmas;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace JFYInformation.Controllers
     public class CompanyController : BaseController
     {
         // GET: Company
-        public ActionResult Index(int? Statu, int? DealResult, string Key, DateTime? Begin, DateTime? End, string City, int p = 0)
+        public ActionResult Index(int? Statu, int? DealResult, string Key, DateTime? Begin, DateTime? End, string City, int page = 1)
         {
             var Cities = new List<City>();
             var query = db.Companies.AsEnumerable();
@@ -45,14 +46,23 @@ namespace JFYInformation.Controllers
             }
             query = query.OrderByDescending(x => x.Time);
             ViewBag.CompanyCount = query.Count();
-            ViewBag.PageInfo = PagerHelper.Do(ref query, 20, p);
+            int totalCount = 0;
+            DoPage(ref query, page, 20, ref totalCount);
             foreach (var item in query)
             {
                 companies.Add(new vCompany(item));
             }
+            var citiesAsIPagedList = new StaticPagedList<vCompany>(companies, page, 20, totalCount);
+           
             Cities = db.Cities.ToList();
             ViewBag.Cities = Cities;
-            return View(companies);
+            return View(citiesAsIPagedList);
+        }
+
+        public void DoPage(ref IEnumerable<Company> src, int Page, int PageSize, ref int totalCount)
+        {
+            totalCount = src.Count();
+            src = src.Skip((Page - 1) * PageSize).Take(PageSize).ToList();
         }
 
 
