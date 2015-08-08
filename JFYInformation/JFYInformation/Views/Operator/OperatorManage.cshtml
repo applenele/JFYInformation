@@ -12,8 +12,8 @@
     <div class="result-content">
         <form class="search">
             检索：
-            <input type="text" name="Begin" class="textbox datetime nullable" placeholder="增加时间(大于)" value="@Request.QueryString["Begin"]" />
-            <input type="text" name="End" class="textbox datetime nullable" placeholder="增加时间(小于)" value="@Request.QueryString["End"]" />
+            <input type="text" name="Begin" class="textbox date nullable" placeholder="增加时间(大于)" value="@Request.QueryString["Begin"]" onclick="SetDate()" />
+            <input type="text" name="End" class="textbox date nullable" placeholder="增加时间(小于)" value="@Request.QueryString["End"]" onclick="SetDate()" />
             <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
             <input type="submit" class="btn btn-info" value="检索" />
         </form>
