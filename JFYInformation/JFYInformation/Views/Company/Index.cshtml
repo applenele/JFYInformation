@@ -89,6 +89,6 @@
             </tbody>
         </table>
      
-        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }))
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index?City="+ @Request.QueryString["City"], new { page = page }))
     </div>
 </div>

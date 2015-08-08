@@ -53,7 +53,7 @@ namespace JFYInformation.Controllers
                 companies.Add(new vCompany(item));
             }
             var citiesAsIPagedList = new StaticPagedList<vCompany>(companies, page, 20, totalCount);
-           
+
             Cities = db.Cities.ToList();
             ViewBag.Cities = Cities;
             return View(citiesAsIPagedList);
@@ -116,6 +116,27 @@ namespace JFYInformation.Controllers
                 var company = db.Companies.Find(id);
                 company.StatuAsInt = 2;
                 company.DealResultAsInt = result;
+                var record = new DealRecord();
+                record = db.DealRecords.Where(r => r.CompanyID == id).FirstOrDefault();
+                if (record == null)
+                {
+                    record = new DealRecord();
+                    record.UID = CurrentUser.ID;
+                    record.CompanyID = id;
+                    record.Time = DateTime.Now;
+                    record.DealResultAsInt = result;
+                    db.DealRecords.Add(record);
+                }
+                else
+                {
+                    var _record = new DealRecord();
+                    _record.UID = CurrentUser.ID;
+                    _record.DealResultAsInt = result;
+                    _record.CompanyID = id;
+                    _record.Time = DateTime.Now;
+                    _record.Hint = "修改";
+                    db.DealRecords.Add(record);
+                }
                 db.SaveChanges();
                 return Content("ok");
             }

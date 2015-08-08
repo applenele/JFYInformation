@@ -15,5 +15,7 @@ namespace JFYInformation.Models
         public DbSet<User> Users { set; get; }
 
         public DbSet<City> Cities { set; get; }
+
+        public DbSet<DealRecord> DealRecords { set; get; }
     }
 }

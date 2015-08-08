@@ -1,0 +1,54 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IEnumerable<JFYInformation.Models.DealRecord>
+@{
+    ViewBag.Title = "处理结果";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div>
+    <div class="result-title">
+        <h1 class="head-tietle">处理记录</h1>
+    </div>
+    <div class="result-content">
+        <form class="search">
+            检索：
+            <input type="text" name="Begin" class="textbox date nullable" placeholder="发布时间(大于)" value="@Request.QueryString["Begin"]" />
+            <input type="text" name="End" class="textbox date nullable" placeholder="发布时间(小于)" value="@Request.QueryString["End"]" />
+            <input type="text" name="Key" class="textbox nullable" placeholder="关键字" />
+            <select class="textbox" name="DealResult">
+                <option value="">处理结果</option>
+                <option value="0">未处理</option>
+                <option value="1">通过</option>
+                <option value="2">拒绝</option>
+            </select>
+            <input type="submit" class="btn btn-info" value="检索" />
+            <span style="margin-top:20px;">共：@ViewBag.RecordCount 条数据</span>
+        </form>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td>公司名称</td>
+                    <td>处理人</td>
+                    <td>处理结果</td>
+                    <td>备注</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr id="@item.ID">
+                        <td>@item.ID</td>
+                        <td>@item.Company.CompanyName</td>
+                        <td>@item.User.Username</td>
+                        <td>@item.DealResult</td>
+                        <td>@item.Hint</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+      @Html.PagedListPager((IPagedList)Model, page => Url.Action("DealResult?Key=" + @Request.QueryString["Key"], new { page = page }))
+    </div>
+</div>
+
+

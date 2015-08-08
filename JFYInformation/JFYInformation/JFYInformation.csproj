@@ -123,8 +123,10 @@
     <Content Include="Scripts\jfy.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.datetimepicker.js" />
     <Content Include="Styles\admin_login.css" />
     <Content Include="Styles\common.css" />
+    <Content Include="Styles\jquery.datetimepicker.css" />
     <Content Include="Styles\main.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -152,6 +154,7 @@
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DB.cs" />
     <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\DealRecord.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\ViewModel\vCompany.cs" />
     <Compile Include="Models\ViewModel\vLogin.cs" />
@@ -186,6 +189,7 @@
     <Content Include="Views\System\CityManage.cshtml" />
     <Content Include="Views\System\AddCity.cshtml" />
     <None Include="Properties\PublishProfiles\nele-jfy.pubxml" />
+    <Content Include="Views\System\DealResult.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
